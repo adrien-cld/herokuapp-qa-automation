@@ -1,13 +1,12 @@
-# conftest.py
 import pytest
 from selenium import webdriver
+from selenium.webdriver.firefox.options import Options
 
 @pytest.fixture
 def driver():
-    # Setup: start browser
-    driver = webdriver.Firefox()
+    options = Options()
+    options.add_argument("--headless")
 
-    yield driver  # Provide the driver to the test
-
-    # Teardown: close browser
+    driver = webdriver.Firefox(options=options)
+    yield driver
     driver.quit()
